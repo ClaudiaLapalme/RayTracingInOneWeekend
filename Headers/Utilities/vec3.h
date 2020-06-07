@@ -12,12 +12,13 @@ class vec3 {
 private:
     double e[3];
 public:
+
     vec3() = default;
     vec3(double v1, double v2, double v3) : e{v1, v2, v3} {};
 
-    double getX() { return e[0]; };
-    double getY() { return e[1]; };
-    double getZ() { return e[2]; };
+    double x() { return e[0]; };
+    double y() { return e[1]; };
+    double z() { return e[2]; };
 
     vec3 operator-() { return vec3(-e[0], -e[1], -e[2]); };
 
@@ -94,10 +95,9 @@ public:
     inline vec3 unit_vector(vec3 v) {
         return v / v.length();
     }
-
-    using point3 = vec3;
-    using color = vec3;
 };
 
+using point3 = vec3;
+using colour = vec3;
 
 #endif //RAYTRACINGINONEWEEKEND_VEC3_H
