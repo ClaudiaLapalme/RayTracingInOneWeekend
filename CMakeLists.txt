@@ -3,8 +3,4 @@ project(RayTracingInOneWeekend)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(main "Sources/main.cpp")
-
-add_custom_command(OUTPUT output_image.ppm
-        COMMAND cmake --version > output_image.ppm
-        )
+add_executable(main Sources/main.cpp Sources/vec3.cpp Sources/vec3.h)
