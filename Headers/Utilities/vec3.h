@@ -42,11 +42,11 @@ public:
         return *this *= 1 / val;
     }
 
-    double length_squared() {
+    double length_squared() const {
         return (e[0] * e[0]) + (e[1] * e[1]) + (e[2] * e[2]);
     }
 
-    double length() {
+    double length() const {
         return std::sqrt(length_squared());
     }
 
@@ -92,7 +92,7 @@ public:
                     u.e[0] * v.e[1] - u.e[1] * v.e[0]);
     }
 
-    inline vec3 unit_vector(vec3 v) {
+    inline static vec3 unit_vector(const vec3& v) {
         return v / v.length();
     }
 };
