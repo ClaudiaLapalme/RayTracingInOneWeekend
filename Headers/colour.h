@@ -16,6 +16,9 @@ void write_colour(std::ostream& out, colour pixel_colour) {
 }
 
 static colour rayColours(const ray& r) {
+    if (r.hitSphere(point3(0, 0, -1), 0.5)) {
+        return colour(1.0, 0, 0);
+    }
     vec3 unitDirection = vec3::unit_vector(r.getDirection());
     auto t = 0.5 * (unitDirection.y() + 1.0); // goes from 0 to 1 aka bottom to top
     // linear blend:                   start value                            end value

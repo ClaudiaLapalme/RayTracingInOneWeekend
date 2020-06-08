@@ -15,6 +15,7 @@ public:
     ray() = default;
     ray(const point3& origin, const vec3& direction) : origin(origin), direction(direction) {};
     static ray raySetup(double aspectRatio, double u, double v);
+    bool hitSphere(const point3& center, double radius) const;
 
     point3 getOrigin() const { return this->origin; };
     vec3 getDirection() const { return this->direction; };
