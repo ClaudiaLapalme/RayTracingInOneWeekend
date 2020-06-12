@@ -6,7 +6,7 @@
 #define RAYTRACINGINONEWEEKEND_MAIN_H
 
 #include "Utilities/vec3.h"
-#include "colour.h"
+#include "Utilities/colour.h"
 #include "Utilities/ray.h"
 
 #include <iostream>

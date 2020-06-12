@@ -7,7 +7,7 @@ add_executable(
         main
         Sources/main.cpp
         Headers/Utilities/vec3.h
-        Headers/colour.h
+        Headers/Utilities/colour.h
         Sources/ray.cpp
         Headers/Utilities/ray.h
 )
