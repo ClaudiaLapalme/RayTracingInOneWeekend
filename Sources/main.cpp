@@ -13,7 +13,7 @@ void main::printImage() {
     const double aspectRatio = 16.0 / 9.0;
     const int imageHeight = static_cast<int> (imageWidth / aspectRatio);
 
-    std::ofstream out("..\\Output\\shadingSurfaceNormals.ppm");
+    std::ofstream out("..\\Output\\simplifiedHitSphere.ppm");
     std::streambuf* coutbuf = std::cout.rdbuf(); //save old buf
     std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
 

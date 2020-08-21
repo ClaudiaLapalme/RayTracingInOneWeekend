@@ -19,15 +19,15 @@ ray ray::raySetup(double aspectRatio, double u, double v) {
 
 std::optional<double> ray::hitSphere(const point3 &center, double radius) const {
     vec3 oc = this->getOrigin() - center;
-    auto a = vec3::dot(this->getDirection(), this->getDirection()); // t^2b dot b
-    auto b = 2.0 * vec3::dot(oc, this->getDirection()); // 2tb dot (A - C)
-    auto c = vec3::dot(oc, oc) - radius * radius; // (A - C) dot (A - C) - r^2
-    auto discriminant = b * b - 4 * a * c;
+    auto a = this->getDirection().length_squared(); // dot product of a vector w/ itself = length square of the vector
+    auto halfB = vec3::dot(oc, this->getDirection());
+    auto c = oc.length_squared() - radius * radius; // dot product of a vector w/ itself = length square of the vector
+    auto discriminant = halfB * halfB - a * c;
 
     if (discriminant < 0 ) { // didn't hit
         return {};
     }
     else { // determines if it hit 1 or 2 points on the sphere
-        return (-b - sqrt(discriminant)) / (2.0 * a);
+        return (-halfB - sqrt(discriminant)) / a;
     }
 }
