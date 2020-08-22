@@ -10,6 +10,7 @@
 #include "Utilities/Ray.h"
 #include "Containers/CollidableList.h"
 #include "Assets/Sphere.h"
+#include "Assets/Camera.h"
 
 #include <iostream>
 #include <fstream>
@@ -17,6 +18,7 @@
 class main {
 public:
     static void printImage();
+    static double randomDouble();
 };
 
 

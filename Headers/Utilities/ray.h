@@ -15,9 +15,6 @@ private:
 public:
     Ray() = default;
     Ray(const point3& origin, const Vec3& direction) : origin(origin), direction(direction) {};
-    static Ray raySetup(double aspectRatio, double u, double v);
-
-    std::optional<double> hitSphere(const point3& center, double radius) const;
 
     point3 getOrigin() const { return this->origin; };
     Vec3 getDirection() const { return this->direction; };

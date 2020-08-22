@@ -8,6 +8,5 @@ add_executable(
         Sources/main.cpp
         Headers/Utilities/Vec3.h
         Headers/Utilities/Colour.h
-        Sources/Utilities/Ray.cpp
         Headers/Utilities/Ray.h
-        Headers/Assets/Collidables.h Headers/Utilities/HitRecord.h Sources/Assets/Sphere.cpp Headers/Assets/Sphere.h Sources/Containers/CollidableList.cpp Headers/Containers/CollidableList.h)
+        Headers/Assets/Collidables.h Headers/Utilities/HitRecord.h Sources/Assets/Sphere.cpp Headers/Assets/Sphere.h Sources/Containers/CollidableList.cpp Headers/Containers/CollidableList.h Sources/Assets/Camera.cpp Headers/Assets/Camera.h)

@@ -11,15 +11,35 @@
 #include <iostream>
 #include <optional>
 
-void write_colour(std::ostream& out, colour pixel_colour) {
-    out << static_cast<int>(255.999 * pixel_colour.x()) << ' '
-        << static_cast<int>(255.999 * pixel_colour.y()) << ' '
-        << static_cast<int>(255.999 * pixel_colour.z()) << '\n';
+double clamp(const double x, const double min, const double max) {
+    if (x < min) {
+        return min;
+    }
+    else if (x > max) {
+        return max;
+    }
+    return x;
+}
+
+void write_colour(std::ostream& out, colour pixel_colour, int samplesPerPixel) {
+    auto r = pixel_colour.x();
+    auto g = pixel_colour.y();
+    auto b = pixel_colour.z();
+
+    // divide colours by the number of pixels
+    auto scale = 1.0 / samplesPerPixel; // more samples = less jagged
+    r *= scale;
+    g *= scale;
+    b *= scale;
+
+    out << static_cast<int>(256 * clamp(r, 0.0, 0.999)) << ' '
+        << static_cast<int>(256 * clamp(g, 0.0, 0.999)) << ' '
+        << static_cast<int>(256 * clamp(b, 0.0, 0.999)) << '\n';
 }
 
 static colour rayColours(const Ray& r, const Collidables& world) {
     constexpr  double infinity = std::numeric_limits<double>::infinity();
-    HitRecord hitRecord;
+    HitRecord hitRecord{};
     bool hasHit = world.hit(r, 0, infinity, hitRecord);
 
     // adjust colour if it hit to demonstrate shading
@@ -31,7 +51,6 @@ static colour rayColours(const Ray& r, const Collidables& world) {
     auto closestHitPoint = 0.5 * (unitDirection.y() + 1.0); // goes from 0 to 1 aka bottom to top
     // linear blend:                   start value                            end value
     return (1.0 - closestHitPoint) * colour(1.0, 1.0, 1.0) + closestHitPoint * colour(0.5, 0.7, 1.0);
-};
-
+}
 
 #endif //RAYTRACINGINONEWEEKEND_COLOUR_H
