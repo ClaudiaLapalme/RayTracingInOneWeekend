@@ -6,21 +6,21 @@
 #define RAYTRACINGINONEWEEKEND_RAY_H
 
 #include <optional>
-#include "vec3.h"
+#include "Vec3.h"
 
-class ray {
+class Ray {
 private:
     point3 origin;
-    vec3 direction;
+    Vec3 direction;
 public:
-    ray() = default;
-    ray(const point3& origin, const vec3& direction) : origin(origin), direction(direction) {};
-    static ray raySetup(double aspectRatio, double u, double v);
+    Ray() = default;
+    Ray(const point3& origin, const Vec3& direction) : origin(origin), direction(direction) {};
+    static Ray raySetup(double aspectRatio, double u, double v);
 
     std::optional<double> hitSphere(const point3& center, double radius) const;
 
     point3 getOrigin() const { return this->origin; };
-    vec3 getDirection() const { return this->direction; };
+    Vec3 getDirection() const { return this->direction; };
 
     point3 at(double t) const { return origin + t * direction; };
 };

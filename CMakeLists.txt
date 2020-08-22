@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(
         main
         Sources/main.cpp
-        Headers/Utilities/vec3.h
-        Headers/Utilities/colour.h
-        Sources/ray.cpp
-        Headers/Utilities/ray.h
-)
+        Headers/Utilities/Vec3.h
+        Headers/Utilities/Colour.h
+        Sources/Utilities/Ray.cpp
+        Headers/Utilities/Ray.h
+        Headers/Assets/Collidables.h Headers/Utilities/HitRecord.h Sources/Assets/Sphere.cpp Headers/Assets/Sphere.h Sources/Containers/CollidableList.cpp Headers/Containers/CollidableList.h)

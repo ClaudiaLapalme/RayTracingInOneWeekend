@@ -5,9 +5,11 @@
 #ifndef RAYTRACINGINONEWEEKEND_MAIN_H
 #define RAYTRACINGINONEWEEKEND_MAIN_H
 
-#include "Utilities/vec3.h"
-#include "Utilities/colour.h"
-#include "Utilities/ray.h"
+#include "Utilities/Vec3.h"
+#include "Utilities/Colour.h"
+#include "Utilities/Ray.h"
+#include "Containers/CollidableList.h"
+#include "Assets/Sphere.h"
 
 #include <iostream>
 #include <fstream>

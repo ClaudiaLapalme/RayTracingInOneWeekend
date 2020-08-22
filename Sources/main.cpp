@@ -13,7 +13,12 @@ void main::printImage() {
     const double aspectRatio = 16.0 / 9.0;
     const int imageHeight = static_cast<int> (imageWidth / aspectRatio);
 
-    std::ofstream out("..\\Output\\simplifiedHitSphere.ppm");
+    CollidableList world ({
+        std::make_shared<Sphere>(point3(0, 0, -1), 0.5),
+        std::make_shared<Sphere>(point3(0, -100.5, -1), 100)
+    });
+
+    std::ofstream out("..\\Output\\6.7-normals.ppm");
     std::streambuf* coutbuf = std::cout.rdbuf(); //save old buf
     std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
 
@@ -25,13 +30,13 @@ void main::printImage() {
 
         for (int i = 0; i < imageWidth; i++) { // left to right
 
-            // Step 1. Calculate the ray from the eye to the pixel
+            // Step 1. Calculate the Ray from the eye to the pixel
             auto u = static_cast<double>(i) / (imageWidth - 1);
             auto v = static_cast<double>(j) / (imageHeight - 1);
 
-            // Step 2. Determine which objects the ray intersects
-            ray r = ray::raySetup(aspectRatio, u, v);
-            colour pixelColours = rayColours(r);
+            // Step 2. Determine which objects the Ray intersects
+            Ray r = Ray::raySetup(aspectRatio, u, v);
+            colour pixelColours = rayColours(r, world);
 
             // Step 3. Compute a colour for that intersection point
             write_colour(std::cout, pixelColours);
