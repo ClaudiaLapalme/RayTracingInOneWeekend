@@ -110,6 +110,14 @@ public:
             }
         }
     }
+
+    static Vec3 randomUnitVector() {
+        auto a = randomDouble(0, 2 * pi);
+        auto z = randomDouble(-1, 1);
+        auto r = sqrt(1 - z * z);
+
+        return Vec3( r * cos(a), r * sin(a), z);
+    }
 };
 
 using Point3 = Vec3;

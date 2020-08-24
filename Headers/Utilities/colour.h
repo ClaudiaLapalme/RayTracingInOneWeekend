@@ -33,11 +33,11 @@ static Colour rayColours(const Ray& r, const Collidables& world, const int depth
 
     constexpr  double infinity = std::numeric_limits<double>::infinity();
     HitRecord hitRecord{};
-    bool hasHit = world.hit(r, 0, infinity, hitRecord);
+    bool hasHit = world.hit(r, 0.001, infinity, hitRecord); // 0.001 to prevent shadow acne
 
     // adjust colour if it hit to demonstrate shading
     if (hasHit) {
-        Point3 target = hitRecord.point + hitRecord.normal + Vec3::randomInUnitSphere();
+        Point3 target = hitRecord.point + hitRecord.normal + Vec3::randomUnitVector();
         // return a random direction for the ray
         return 0.5 * rayColours(Ray(hitRecord.point, target - hitRecord.point), world, depth - 1);
     }
