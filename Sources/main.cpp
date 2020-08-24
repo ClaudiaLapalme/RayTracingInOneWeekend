@@ -4,7 +4,6 @@
 
 #include "../Headers/main.h"
 
-#include <random>
 
 int main() {
     main::printImage();
@@ -18,15 +17,16 @@ void main::printImage() {
     constexpr double viewportHeight = 2.0;
     const double viewportWidth = aspectRatio * viewportHeight;
     constexpr double focalLength = 1.0;
+    constexpr int maxNumberOfSurfaceBounces = 20;
 
     CollidableList world ({
-        std::make_shared<Sphere>(point3(0, 0, -1), 0.5),
-        std::make_shared<Sphere>(point3(0, -100.5, -1), 100)
+        std::make_shared<Sphere>(Point3(0, 0, -1), 0.5),
+        std::make_shared<Sphere>(Point3(0, -100.5, -1), 100)
     });
 
     Camera camera(viewportHeight, viewportWidth, focalLength);
 
-    std::ofstream out("..\\Output\\7-antialiasing.ppm");
+    std::ofstream out("..\\Output\\8.2-matte.ppm");
     std::streambuf* coutbuf = std::cout.rdbuf(); //save old buf
     std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
 
@@ -38,7 +38,7 @@ void main::printImage() {
 
         for (int i = 0; i < imageWidth; i++) { // left to right
 
-            colour pixelColours(0, 0, 0);
+            Colour pixelColours(0, 0, 0);
             for (int s = 0; s < samplesPerPixel; s++) {
                 // Step 1. Calculate the Ray from the eye to the pixel
                 auto u = static_cast<double>(i + randomDouble()) / (imageWidth - 1);
@@ -46,7 +46,7 @@ void main::printImage() {
 
                 // Step 2. Determine which objects the Ray intersects
                 Ray r = camera.getRay(u, v);
-                pixelColours += rayColours(r, world);
+                pixelColours += rayColours(r, world, maxNumberOfSurfaceBounces);
             }
             // Step 3. Compute a colour for that intersection point
             write_colour(std::cout, pixelColours, samplesPerPixel);
@@ -55,11 +55,4 @@ void main::printImage() {
 
     std::cout.rdbuf(coutbuf); //reset to standard output again
     std::cerr << "\033[32m" << "\nThe image has been produced.\n" << "\033[0m";
-}
-
-double main::randomDouble() {
-    std::random_device rd;
-    static std::uniform_real_distribution<double> distribution(0.0, 1.0);
-    static std::mt19937 randomGenerator(rd());
-    return distribution(randomGenerator);
 }

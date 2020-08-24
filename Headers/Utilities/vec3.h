@@ -5,6 +5,8 @@
 #ifndef RAYTRACINGINONEWEEKEND_VEC3_H
 #define RAYTRACINGINONEWEEKEND_VEC3_H
 
+#include "MathFunctions.h"
+
 #include <cmath>
 #include <iostream>
 
@@ -95,9 +97,22 @@ public:
     inline static Vec3 unit_vector(const Vec3& v) {
         return v / v.length();
     }
+
+    static Vec3 random(const double min = 0, const double max = 1) {
+        return Vec3(randomDouble(min, max), randomDouble(min, max), randomDouble(min, max));
+    }
+
+    static Vec3 randomInUnitSphere() {
+        while (true) {
+            auto p = random(-1, 1);
+            if (p.length_squared() < 1) {
+                return p;
+            }
+        }
+    }
 };
 
-using point3 = Vec3;
-using colour = Vec3;
+using Point3 = Vec3;
+using Colour = Vec3;
 
 #endif //RAYTRACINGINONEWEEKEND_VEC3_H

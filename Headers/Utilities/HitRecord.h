@@ -9,7 +9,7 @@
 #include "Ray.h"
 
 struct HitRecord {
-    point3 point;
+    Point3 point;
     Vec3 normal; // closest normal
     double t;
     bool frontFace;

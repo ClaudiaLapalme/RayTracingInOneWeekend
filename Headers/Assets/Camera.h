@@ -15,11 +15,10 @@ public:
     Ray getRay(const double u, const double v) const;
 
 private:
-    point3 origin;
-    point3 lowerLeftCorner;
-    Vec3 horizontal;
-    Vec3 vertical;
-
+    Point3 origin{};
+    Point3 lowerLeftCorner{};
+    Vec3 horizontal{};
+    Vec3 vertical{};
 };
 
 

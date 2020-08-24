@@ -10,16 +10,16 @@
 
 class Ray {
 private:
-    point3 origin;
+    Point3 origin;
     Vec3 direction;
 public:
     Ray() = default;
-    Ray(const point3& origin, const Vec3& direction) : origin(origin), direction(direction) {};
+    Ray(const Point3& origin, const Vec3& direction) : origin(origin), direction(direction) {};
 
-    point3 getOrigin() const { return this->origin; };
+    Point3 getOrigin() const { return this->origin; };
     Vec3 getDirection() const { return this->direction; };
 
-    point3 at(double t) const { return origin + t * direction; };
+    Point3 at(double t) const { return origin + t * direction; };
 };
 
 #endif //RAYTRACINGINONEWEEKEND_RAY_H

@@ -18,7 +18,6 @@
 class main {
 public:
     static void printImage();
-    static double randomDouble();
 };
 
 

@@ -11,11 +11,11 @@
 class Sphere : public Collidables {
 public:
     Sphere() = default;
-    Sphere(const point3 center, const double radius) : center(center), radius(radius) {};
+    Sphere(const Point3 center, const double radius) : center(center), radius(radius) {};
     virtual bool hit(const Ray& ray, const double tMin, const double tMax, HitRecord& hitRecord) const override;
 
 private:
-    point3 center;
+    Point3 center;
     double radius;
 };
 
