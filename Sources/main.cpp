@@ -26,7 +26,7 @@ void main::printImage() {
 
     Camera camera(viewportHeight, viewportWidth, focalLength);
 
-    std::ofstream out("..\\Output\\8.2-matte.ppm");
+    std::ofstream out("..\\Output\\8.3-gammaCorrection.ppm");
     std::streambuf* coutbuf = std::cout.rdbuf(); //save old buf
     std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
 
