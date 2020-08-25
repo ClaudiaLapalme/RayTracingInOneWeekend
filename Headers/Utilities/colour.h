@@ -9,7 +9,6 @@
 #include "Ray.h"
 #include "../Assets/Collidables.h"
 #include <iostream>
-#include <optional>
 
 void write_colour(std::ostream& out, Colour pixel_colour, int samplesPerPixel) {
 
@@ -37,9 +36,14 @@ static Colour rayColours(const Ray& r, const Collidables& world, const int depth
 
     // adjust colour if it hit to demonstrate shading
     if (hasHit) {
-        Point3 target = hitRecord.point + hitRecord.normal + Vec3::randomUnitVector();
-        // return a random direction for the ray
-        return 0.5 * rayColours(Ray(hitRecord.point, target - hitRecord.point), world, depth - 1);
+        Ray scattered;
+        Colour attenuation;
+
+        if (hitRecord.materialPtr->scatterLight(r, hitRecord, attenuation, scattered)) {
+            return attenuation * rayColours(scattered, world, depth - 1);
+        }
+
+        return Colour{0, 0, 0};
     }
 
     Vec3 unitDirection = Vec3::unit_vector(r.getDirection());

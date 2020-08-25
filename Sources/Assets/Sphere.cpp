@@ -19,6 +19,7 @@ bool Sphere::hit(const Ray& ray, const double tMin, const double tMax, HitRecord
             hitRecord.point = ray.at(hitRecord.t);
             auto outwardNormal = (hitRecord.point - center) / radius;
             hitRecord.setFaceNormal(ray, outwardNormal);
+            hitRecord.materialPtr = materialPtr;
 
             return true;
         }
@@ -30,6 +31,7 @@ bool Sphere::hit(const Ray& ray, const double tMin, const double tMax, HitRecord
             hitRecord.point = ray.at(hitRecord.t);
             auto outwardNormal = (hitRecord.point - center) / radius;
             hitRecord.setFaceNormal(ray, outwardNormal);
+            hitRecord.materialPtr = materialPtr;
 
             return true;
         }

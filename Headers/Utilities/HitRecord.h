@@ -7,10 +7,16 @@
 
 #include "Vec3.h"
 #include "Ray.h"
+#include "../Materials/Materials.h"
+
+#include <memory>
+
+class Material;
 
 struct HitRecord {
     Point3 point;
     Vec3 normal; // closest normal
+    std::shared_ptr<Material> materialPtr;
     double t;
     bool frontFace;
 

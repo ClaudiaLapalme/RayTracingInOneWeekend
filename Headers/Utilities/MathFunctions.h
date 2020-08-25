@@ -8,12 +8,18 @@
 #include <random>
 
 static constexpr double pi = 3.1415926535897932385;
+static std::random_device rd;
+static std::mt19937 randomGenerator(rd());
 
 static const double randomDouble(const double min = 0.0, const double max = 1.0) {
-    std::random_device rd;
-    static std::uniform_real_distribution<double> distribution(min, max);
-    static std::mt19937 randomGenerator(rd());
-    return distribution(randomGenerator);
+    double randomNumber = min - 1; // to deal with a bug where the random number generated is not within range
+    while (randomNumber < min || randomNumber > max) {
+        static std::random_device rd;
+        static std::mt19937 randomGenerator(rd());
+        static std::uniform_real_distribution<double> distribution(min, max);
+        randomNumber = distribution(randomGenerator);
+    }
+    return randomNumber;
 }
 
 static const double clamp(const double x, const double min, const double max) {

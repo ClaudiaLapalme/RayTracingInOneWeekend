@@ -11,6 +11,9 @@
 #include "Containers/CollidableList.h"
 #include "Assets/Sphere.h"
 #include "Assets/Camera.h"
+#include "Materials/Materials.h"
+#include "Materials/Matte.h"
+#include "Materials/Metal.h"
 
 #include <iostream>
 #include <fstream>

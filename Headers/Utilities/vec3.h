@@ -118,6 +118,10 @@ public:
 
         return Vec3( r * cos(a), r * sin(a), z);
     }
+
+    static Vec3 reflect(const Vec3& vectorIn, const Vec3& normal) {
+        return vectorIn - 2 * dot(vectorIn, normal) * normal; // vec going in the collidable - 2 * vec's y
+    }
 };
 
 using Point3 = Vec3;

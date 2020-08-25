@@ -13,20 +13,31 @@ void main::printImage() {
     constexpr double aspectRatio = 16.0 / 9.0;
     constexpr int imageWidth = 1080;
     const int imageHeight = static_cast<int> (imageWidth / aspectRatio);
-    constexpr int samplesPerPixel = 10;
+    constexpr int samplesPerPixel = 30;
     constexpr double viewportHeight = 2.0;
     const double viewportWidth = aspectRatio * viewportHeight;
     constexpr double focalLength = 1.0;
     constexpr int maxNumberOfSurfaceBounces = 20;
 
+    // materials
+
+    auto materialGround = std::make_shared<Matte>(Colour(0.8, 0.8, 0.0));
+    auto materialCenter = std::make_shared<Matte>(Colour(0.7, 0.3, 0.3));
+    auto materialLeft   = std::make_shared<Metal>(Colour(0.8, 0.8, 0.8));
+    auto materialRight  = std::make_shared<Metal>(Colour(0.8, 0.6, 0.2));
+
+    // world and its population
+
     CollidableList world ({
-        std::make_shared<Sphere>(Point3(0, 0, -1), 0.5),
-        std::make_shared<Sphere>(Point3(0, -100.5, -1), 100)
+      std::make_shared<Sphere>(Point3( 0, -100.5, -1), 100, materialGround),
+      std::make_shared<Sphere>(Point3( 0,    0.0, -1), 0.5, materialCenter),
+      std::make_shared<Sphere>(Point3(-1,    0.0, -1), 0.5, materialLeft),
+      std::make_shared<Sphere>(Point3( 1,    0.0, -1), 0.5, materialRight),
     });
 
     Camera camera(viewportHeight, viewportWidth, focalLength);
 
-    std::ofstream out("..\\Output\\8.5-lambertianReflection.ppm");
+    std::ofstream out("..\\Output\\9.5-matte and metal materials.ppm");
     std::streambuf* coutbuf = std::cout.rdbuf(); //save old buf
     std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
 
